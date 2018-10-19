@@ -6,6 +6,7 @@ const VehicleSchema = new mongoose.Schema({
     year: String,
     licenseNumber: { type: String, unique: true },
     categories: Array,
+    changeLog: Array,
     created_at: {type: Date, default: Date.now()},
     updated_at: {type: Date, default: Date.now()},
 });

@@ -48,46 +48,22 @@ exports.createVehicle = async (name, colour, year, licenseNumber, categories) =>
        return {success: false, data: null, message: 'a vehicle with that license number already exists'};
     }
 
-    //next we kinda go through our categories in the list supplied,  first of all car and truck
-    //can't share the same room and at the same time we must have at least one of those options
-    //present.
+    //we kinda go through our categories in the list supplied, validate them and act accordingly
+    const returnedCategoriesResponse = await CategoryServiceProvider.validateAndCreateCategories(lowerCaseCategories);
 
-    let hasFoundCar = false;
-    let hasFoundTruck = false;
-
-    lowerCaseCategories.map((category) => {
-        if(category.trim() === 'car'){
-            hasFoundCar = true;
-        }
-
-        if(category.trim() === 'truck'){
-            hasFoundTruck = true;
-        }
-    });
-
-    if(hasFoundCar && hasFoundTruck){
-        //we can't have both car and truck.
-        return { success: false, data: null, message: 'we can\'t have categories list containing both car and truck, choose one'};
+    if(!returnedCategoriesResponse.success){
+        return returnedCategoriesResponse;
     }
 
-    if(!(hasFoundCar || hasFoundTruck)){
-        //we need to have at either car or truck present in the categories list.
-        return { success: false, data: null, message: 'we need to have categories list containing either car or truck, one must be present'};
-    }
-
-
-    //next we send over our categories list to the category service provider to create the categories that doesn't exist
-    //and return a list of the created cateogries model.
-    const returnedCategories = await CategoryServiceProvider.createCategoriesFromList(lowerCaseCategories);
-
-    const returnedCategoryIds = returnedCategories.map((returnedCategory) => {
-        return returnedCategory._id;
+    const returnedCategories = returnedCategoriesResponse.data;
+    const returnedCategoryNames = returnedCategories.map((returnedCategory) => {
+        return returnedCategory.name;
     });
 
 
 
     let createdVehicle = await VehicleModel.create({
-        name, colour, year, licenseNumber, returnedCategoryIds
+        name, colour, year, licenseNumber, categories: returnedCategoryNames
     });
 
     return (createdVehicle) ?
@@ -128,12 +104,40 @@ exports.updateVehicle = async (licenseNumber, newName, newColour, newYear, newCa
 
     //we confirm first that the vehicle exist.
     let vehicle = await exports.getVehicleByLicenseNumber(licenseNumber);
-    if(! await exports.getVehicleByLicenseNumber(licenseNumber)){
+    if(!vehicle){
         return {success: false, data: null, message: 'we couldn\'t find the vehicle in question'};
     }
 
+    //before we make any changes we store the current state of the vehicle to our change log.
+
+    vehicle.changeLog.push(vehicle);
+
+    //we kinda go through our categories in the list supplied, validate them and act accordingly
+    const returnedCategoriesResponse = await CategoryServiceProvider.validateAndCreateCategories(lowerCaseCategories);
+
+    if(!returnedCategoriesResponse.success){
+        return returnedCategoriesResponse;
+    }
+
+    const returnedCategories = returnedCategoriesResponse.data;
+    const returnedCategoryNames = returnedCategories.map((returnedCategory) => {
+        return returnedCategory.name;
+    });
 
 
+
+    //with that out of the way, next we update the various fields on the vehicle object.
+    let updatedVehicle = await VehicleModel.update({licenseNumber}, {
+        name: newName,
+        colour: newColour,
+        year: newYear,
+        changeLog: vehicle.changeLog,
+        categories: returnedCategoryNames
+    });
+
+    return (updatedVehicle)?
+        {success: true, data: updatedVehicle, message: `vehicle ${licenseNumber} updated successfully`} :
+        {success: false, data: null, message: `could not update vehicle ${licenseNumber}`};
 
 
 }
@@ -154,6 +158,19 @@ exports.getVehicleByLicenseNumber = async (licenseNumber) => {
     return await VehicleModel.findOne({licenseNumber});
 }
 
+
+/**
+ *
+ * This method is responsible for retrieving all vehicles that exist in the database.
+ *
+ * @param limit | a number dictating how many should be returned. -1 = everything.
+ *
+ * @returns {Promise<void>} | resolves to the vehicle object.
+ *
+ */
+exports.getAllVehicles = async (limit = -1) => {
+    
+}
 
 
 
