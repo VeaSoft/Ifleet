@@ -107,7 +107,7 @@ it('confirms that the license plate number remains unchanged when you update a v
             expect(res.body).to.not.equal(undefined);
             expect(res.body).to.not.equal(null);
             expect(res.body).to.have.property('name');
-            expect(res.body.name.toLocaleLowerCase()).to.equal('toyota hillux - updated');
+            expect(res.body.name.toLocaleLowerCase()).to.equal('toyota hillux - linsr');
             expect(res.body.colour.toLocaleLowerCase()).to.equal('black');
             expect(res.body.year.toLocaleLowerCase()).to.equal('2010');
             expect(res.body.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
@@ -123,7 +123,7 @@ it('confirms that you are able to delete a vehicle', () => {
 
     api.delete('/vehicles/KJA-56-kyz').set('Accept', 'application/json').expect('Content-type',  /json/).expect(200)
         .end((err, res) => {
-           
+
         });
 
 

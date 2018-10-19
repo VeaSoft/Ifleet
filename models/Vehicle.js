@@ -4,7 +4,7 @@ const VehicleSchema = new mongoose.Schema({
     name: String,
     colour: String,
     year: String,
-    licenseNumber: Array,
+    licenseNumber: { type: String, unique: true },
     categories: Array,
     created_at: {type: Date, default: Date.now()},
     updated_at: {type: Date, default: Date.now()},
