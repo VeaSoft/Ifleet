@@ -110,7 +110,28 @@ exports.createVehicle = async (name, colour, year, licenseNumber, categories) =>
  *
  */
 exports.updateVehicle = async (licenseNumber, newName, newColour, newYear, newCategories) => {
-    
+    //so first we love dealing with lower case characters all through so we convert all our parameters
+    //to lower case characters.
+
+    newName = newName.toLocaleLowerCase();
+    newColour = newColour.toLocaleLowerCase();
+    newYear = newYear.toLocaleLowerCase();
+    licenseNumber = licenseNumber.toLocaleLowerCase();
+
+    let lowerCaseCategories = [];
+
+    categories.map((category) => {
+        lowerCaseCategories.push(category.toLocaleLowerCase());
+    });
+
+    //at this point we have all our data in lowercase,  next we do some series of confirmations.
+
+    //we confirm first that the vehicle exist.
+    let vehicle = await exports.getVehicleByLicenseNumber(licenseNumber);
+    if(! await exports.getVehicleByLicenseNumber(licenseNumber)){
+        return {success: false, data: null, message: 'we couldn\'t find the vehicle in question'};
+    }
+
 
 
 

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="840b345c-fee7-4104-8a7b-0be1bb80d1b0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/models/Vehicle.js" afterPath="$PROJECT_DIR$/models/Vehicle.js" />
-      <change beforePath="$PROJECT_DIR$/test.js" afterPath="$PROJECT_DIR$/test.js" />
+      <change beforePath="$PROJECT_DIR$/serviceProviders/VehicleServiceProvider.js" afterPath="$PROJECT_DIR$/serviceProviders/VehicleServiceProvider.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,10 +80,10 @@
       <file leaf-file-name="VehicleServiceProvider.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/serviceProviders/VehicleServiceProvider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="112" column="4" lean-forward="false" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
+            <state relative-caret-position="311">
+              <caret line="131" column="50" lean-forward="false" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
               <folding>
-                <marker date="1539971117082" expanded="true" signature="4339:4563" ph="..." />
+                <marker date="1539971143559" expanded="true" signature="5193:5417" ph="..." />
               </folding>
             </state>
           </provider>
@@ -309,12 +308,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1539955103450</updated>
-      <workItem from="1539955105309" duration="15367000" />
+      <workItem from="1539955105309" duration="15396000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15367000" />
+    <option name="totallyTimeSpent" value="15396000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1366" height="720" extended-state="6" />
@@ -425,10 +424,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/serviceProviders/VehicleServiceProvider.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="112" column="4" lean-forward="false" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
+        <state relative-caret-position="311">
+          <caret line="131" column="50" lean-forward="false" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
           <folding>
-            <marker date="1539971117082" expanded="true" signature="4339:4563" ph="..." />
+            <marker date="1539971143559" expanded="true" signature="5193:5417" ph="..." />
           </folding>
         </state>
       </provider>
