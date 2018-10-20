@@ -27,11 +27,13 @@ it('confirms that you can create a vehicle', async () => {
     expect(res).to.not.equal(null);
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
-    expect(res.body).to.have.property('name');
-    expect(res.body.name.toLocaleLowerCase()).to.equal('toyota hillux');
-    expect(res.body.colour.toLocaleLowerCase()).to.equal('black');
-    expect(res.body.year.toLocaleLowerCase()).to.equal('2010');
-    expect(res.body.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
+    expect(res.body.data).to.not.equal(undefined);
+    expect(res.body.data).to.not.equal(null);
+    expect(res.body.data).to.have.property('name');
+    expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux');
+    expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
+    expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
+    expect(res.body.data.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
 
 });
 
@@ -47,10 +49,10 @@ it('confirms that you can retrieve a vehicle by it\'s license plate number', asy
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
     expect(res.body).to.have.property('name');
-    expect(res.body.name.toLocaleLowerCase()).to.equal('toyota hillux');
-    expect(res.body.colour.toLocaleLowerCase()).to.equal('black');
-    expect(res.body.year.toLocaleLowerCase()).to.equal('2010');
-    expect(res.body.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
+    expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux');
+    expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
+    expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
+    expect(res.body.data.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
 
 
 });
@@ -72,10 +74,10 @@ it('confirms that you can *update* a vehicle by it\'s license plate number', asy
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
     expect(res.body).to.have.property('name');
-    expect(res.body.name.toLocaleLowerCase()).to.equal('toyota hillux - updated');
-    expect(res.body.colour.toLocaleLowerCase()).to.equal('black');
-    expect(res.body.year.toLocaleLowerCase()).to.equal('2010');
-    expect(res.body.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
+    expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux - updated');
+    expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
+    expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
+    expect(res.body.data.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
 
 
 });
@@ -97,10 +99,10 @@ it('confirms that the license plate number remains unchanged when you update a v
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
     expect(res.body).to.have.property('name');
-    expect(res.body.name.toLocaleLowerCase()).to.equal('toyota hillux - linsr');
-    expect(res.body.colour.toLocaleLowerCase()).to.equal('black');
-    expect(res.body.year.toLocaleLowerCase()).to.equal('2010');
-    expect(res.body.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
+    expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux - linsr');
+    expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
+    expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
+    expect(res.body.data.licenseNumber.toLocaleLowerCase()).to.equal('kja-56-kyz');
 
 
 });
