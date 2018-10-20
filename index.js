@@ -40,10 +40,11 @@ apiRouter.get('/vehicles',  VehicleController.index); //get all vehicles, also b
 
 apiRouter.get('/vehicles/:licenseNumber', VehicleController.show); //retrieve a single vehicle by license number.
 
-apiRouter.
+apiRouter.post('/vehicles', VehicleController.store); //create a new vehicle.
 
+apiRouter.put('/vehicles/:licenseNumber', VehicleController.update); //update an already existing vehicle.
 
-
+apiRouter.delete('/vehicles/:licenseNumber', VehicleController.delete); //delete an already existing vehicle.
 
 
 app.listen(port, () => {
