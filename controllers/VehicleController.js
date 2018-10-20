@@ -100,8 +100,10 @@ exports.store = async (req, res) => {
         let licenseNumber = req.body.licenseNumber;
         let categories = req.body.categories;
 
+        console.log('vehicles working: ', req.body);
+
         //we kinda do a quick check to make sure that at least we have both name and license number.
-        if((!(name && licenseNumber)) || (name.trim().length > 0 && licenseNumber.trim().length > 0)){
+        if((!(name && licenseNumber))){
             return res.status(StatusCodes.BAD_REQUEST).json({
                status: StatusCodes.BAD_REQUEST, data: null, message: `both name and license number must be present`
             });
@@ -109,12 +111,15 @@ exports.store = async (req, res) => {
 
         //we go ahead to create the vehicle
         let vehicleResponse = await VehicleServiceProvider.createVehicle(name, colour, year, licenseNumber, categories);
+        console.log(vehicleResponse);
+
         if(!vehicleResponse.success){
             //in this case the creation process might have failed for a variety of reasons.
             return res.status(StatusCodes.BAD_REQUEST).json({
                 status: StatusCodes.BAD_REQUEST, data: null, message: vehicleResponse.message
             });
         }
+
         //we successfully created the vehicle.
         return res.status(StatusCodes.CREATED).json({
             status: StatusCodes.CREATED, data: vehicleResponse.data, message: vehicleResponse.message

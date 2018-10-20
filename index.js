@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
-
+mongoose.set('useCreateIndex', true);
 mongoose.connect(mongoDBUrl, { useNewUrlParser: true }, () => {
     console.log('mongo connected');
 });

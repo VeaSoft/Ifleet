@@ -63,8 +63,14 @@ exports.validateAndCreateCategories = async (categoryNames) => {
     //can't share the same room and at the same time we must have at least one of those options
     //present.
 
+    let lowerCaseCategories = [];
+    categoryNames.map((categoryName) => {
+       lowerCaseCategories.push(categoryName.toLocaleLowerCase());
+    });
+
     let hasFoundCar = false;
     let hasFoundTruck = false;
+
 
     lowerCaseCategories.map((category) => {
         if (category.trim() === 'car') {
