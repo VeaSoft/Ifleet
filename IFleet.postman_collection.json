@@ -1,0 +1,199 @@
+{
+	"info": {
+		"name": "IFleet",
+		"_postman_id": "1c0be8be-31f3-c16d-8bdd-f2dfcc9b3867",
+		"description": "FleetManagement API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Toyota Hillux\",\n        \"colour\": \"black\",\n        \"year\": \"2010\",\n        \"licenseNumber\": \"KJA-56-kyz\",\n        \"categories\": [\"car\", \"4 wheeler\", \"black vehicles\"]\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/vehicles",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles"
+					]
+				},
+				"description": "Post request to create a new vehicle"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Vehicle By License Number",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Toyota Hillux\",\n        \"colour\": \"black\",\n        \"year\": \"2010\",\n        \"licenseNumber\": \"KJA-56-kyz\",\n        \"categories\": [\"car\", \"4 wheeler\", \"black vehicles\"]\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/vehicles",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles"
+					]
+				},
+				"description": "Post request to create a new vehicle"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve All Vehicles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Toyota Hillux\",\n        \"colour\": \"black\",\n        \"year\": \"2010\",\n        \"licenseNumber\": \"KJA-56-kyz\",\n        \"categories\": [\"car\", \"4 wheeler\", \"black vehicles\"]\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/vehicles",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles"
+					]
+				},
+				"description": "Post request to create a new vehicle"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve All Vehicles By Category",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Toyota Hillux\",\n        \"colour\": \"black\",\n        \"year\": \"2010\",\n        \"licenseNumber\": \"KJA-56-kyz\",\n        \"categories\": [\"car\", \"4 wheeler\", \"black vehicles\"]\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/vehicles?categories=car",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "categories",
+							"value": "car",
+							"equals": true
+						}
+					]
+				},
+				"description": "Post request to create a new vehicle"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vehicle",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Toyota Hillux\",\n        \"colour\": \"black\",\n        \"year\": \"2010\",\n        \"licenseNumber\": \"KJA-56-kyz\",\n        \"categories\": [\"car\", \"4 wheels\", \"black vehicles\"]\n    }"
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/vehicles/KJA-56-kyz",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"KJA-56-kyz"
+					]
+				},
+				"description": "Post request to create a new vehicle"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Vehicle",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/api/v1/vehicles/KJA-56-kyz",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"KJA-56-kyz"
+					]
+				},
+				"description": "Post request to create a new vehicle"
+			},
+			"response": []
+		}
+	]
+}
