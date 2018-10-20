@@ -100,7 +100,7 @@ exports.store = async (req, res) => {
         let licenseNumber = req.body.licenseNumber;
         let categories = req.body.categories;
 
-        console.log('vehicles working: ', req.body);
+        //console.log('vehicles working: ', req.body);
 
         //we kinda do a quick check to make sure that at least we have both name and license number.
         if((!(name && licenseNumber))){
@@ -111,7 +111,7 @@ exports.store = async (req, res) => {
 
         //we go ahead to create the vehicle
         let vehicleResponse = await VehicleServiceProvider.createVehicle(name, colour, year, licenseNumber, categories);
-        console.log(vehicleResponse);
+        console.log('volavola', vehicleResponse);
 
         if(!vehicleResponse.success){
             //in this case the creation process might have failed for a variety of reasons.
@@ -152,8 +152,9 @@ exports.update = async (req, res) => {
         let licenseNumber = req.params.licenseNumber;
         let categories = req.body.categories;
 
+        //console.log('vehicles body update request: ', req.body);
         //we kinda do a quick check to make sure that at least we have both name and license number.
-        if((!(name && licenseNumber)) || (name.trim().length > 0 && licenseNumber.trim().length > 0)){
+        if((!(name && licenseNumber))){
             return res.status(StatusCodes.BAD_REQUEST).json({
                 status: StatusCodes.BAD_REQUEST, data: null, message: `both name and license-number(param) must be present`
             });
@@ -161,6 +162,7 @@ exports.update = async (req, res) => {
 
         //we goahead to start the update operation.
         let updateVehicleResponse = await VehicleServiceProvider.updateVehicle(licenseNumber, name, colour, year, categories);
+        //console.log('vehicle body update response: ', updateVehicleResponse);
         if(!updateVehicleResponse.success){
             //so the update operation was not successful
             return res.status(StatusCodes.BAD_REQUEST).json({

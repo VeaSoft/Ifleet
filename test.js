@@ -48,7 +48,7 @@ it('confirms that you can retrieve a vehicle by it\'s license plate number', asy
     expect(res).to.not.equal(null);
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
-    expect(res.body).to.have.property('name');
+    expect(res.body.data).to.have.property('name');
     expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux');
     expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
     expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
@@ -73,7 +73,6 @@ it('confirms that you can *update* a vehicle by it\'s license plate number', asy
     expect(res).to.not.equal(null);
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
-    expect(res.body).to.have.property('name');
     expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux - updated');
     expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
     expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
@@ -98,7 +97,9 @@ it('confirms that the license plate number remains unchanged when you update a v
     expect(res).to.not.equal(null);
     expect(res.body).to.not.equal(undefined);
     expect(res.body).to.not.equal(null);
-    expect(res.body).to.have.property('name');
+    expect(res.body.data).to.not.equal(undefined);
+    expect(res.body.data).to.not.equal(null);
+    expect(res.body.data).to.have.property('name');
     expect(res.body.data.name.toLocaleLowerCase()).to.equal('toyota hillux - linsr');
     expect(res.body.data.colour.toLocaleLowerCase()).to.equal('black');
     expect(res.body.data.year.toLocaleLowerCase()).to.equal('2010');
@@ -107,10 +108,6 @@ it('confirms that the license plate number remains unchanged when you update a v
 
 });
 
-
-it('confirms that you are able to delete a vehicle', async () => {
-    const res = await api.delete('/vehicles/KJA-56-kyz').set('Accept', 'application/json').expect('Content-type',  /json/).expect(200);
-});
 
 
 it('confirms that you can not create a vechicle with the same license plate number', async () => {
@@ -124,8 +121,14 @@ it('confirms that you can not create a vechicle with the same license plate numb
         categories: categories,
     }).expect('Content-type',  /json/).expect(400);
 
+    console.log('hi say hi', res.statusCode);
+
 });
 
+
+it('confirms that you are able to delete a vehicle', async () => {
+    const res = await api.delete('/vehicles/KJA-56-kyz').set('Accept', 'application/json').expect('Content-type',  /json/).expect(200);
+});
 
 
 it('confirms that you can not create a vehicle that has both car and truck as a category', async () => {

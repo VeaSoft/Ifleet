@@ -44,7 +44,11 @@ exports.createVehicle = async (name, colour, year, licenseNumber, categories) =>
     //at this point we have all our data in lowercase,  next we do some series of confirmations.
 
     //we confirm first that another vehicle with that licenseNumber does not exist yet.
-    if(await exports.getVehicleByLicenseNumber(licenseNumber)){
+
+    const vehicleExist = await exports.getVehicleByLicenseNumber(licenseNumber);
+    console.log('vehicle exists', vehicleExist);
+    if(vehicleExist){
+        console.log('hi lin');
        return {success: false, data: null, message: 'a vehicle with that license number already exists'};
     }
 
@@ -96,7 +100,7 @@ exports.updateVehicle = async (licenseNumber, newName, newColour, newYear, newCa
 
     let lowerCaseCategories = [];
 
-    categories.map((category) => {
+    newCategories.map((category) => {
         lowerCaseCategories.push(category.toLocaleLowerCase());
     });
 
@@ -109,8 +113,9 @@ exports.updateVehicle = async (licenseNumber, newName, newColour, newYear, newCa
     }
 
     //before we make any changes we store the current state of the vehicle to our change log.
-
-    vehicle.changeLog.push(vehicle);
+    //console.log('just before changelog push');
+    let newChangeLog = [...vehicle.changeLog, vehicle];
+    //console.log('vehicle change log' , vehicle.changeLog);
 
     //we kinda go through our categories in the list supplied, validate them and act accordingly
     const returnedCategoriesResponse = await CategoryServiceProvider.validateAndCreateCategories(lowerCaseCategories);
@@ -124,18 +129,22 @@ exports.updateVehicle = async (licenseNumber, newName, newColour, newYear, newCa
         return returnedCategory.name;
     });
 
-
+    //console.log('update categories ', returnedCategoryNames);
 
     //with that out of the way, next we update the various fields on the vehicle object.
-    let updatedVehicle = await VehicleModel.update({licenseNumber}, {
+    let updatedVehicleResponse = await VehicleModel.updateOne({licenseNumber: licenseNumber}, {
         name: newName,
         colour: newColour,
         year: newYear,
-        changeLog: vehicle.changeLog,
+        changeLog: newChangeLog,
         categories: returnedCategoryNames
     });
+    const successful = (updatedVehicleResponse.nModified > 0);
+    let updatedVehicle = await exports.getVehicleByLicenseNumber(licenseNumber);
 
-    return (updatedVehicle)?
+    //console.log('i got here, updated updated');
+
+    return (successful)?
         {success: true, data: updatedVehicle, message: `vehicle ${licenseNumber} updated successfully`} :
         {success: false, data: null, message: `could not update vehicle ${licenseNumber}`};
 
@@ -155,6 +164,7 @@ exports.updateVehicle = async (licenseNumber, newName, newColour, newYear, newCa
 exports.getVehicleByLicenseNumber = async (licenseNumber) => {
 
     licenseNumber = licenseNumber.toLocaleLowerCase();
+    console.log('vehicle License Number', licenseNumber);
     return await VehicleModel.findOne({licenseNumber});
 }
 
@@ -212,7 +222,7 @@ exports.deleteVehicleByLicenseNumber = async (licenseNumber) => {
         return {success: false, data: null, message: 'we couldn\'t find the vehicle in question'};
     }
 
-    await VehicleModel.findAndRemove({vehicle});
+    await VehicleModel.deleteOne({licenseNumber});
     return {success: true, data: {}, message: 'vehicle has been deleted.'};
 
 }
