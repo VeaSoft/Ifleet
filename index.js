@@ -32,6 +32,17 @@ apiRouter.get('/live', (req, res) => {
    res.status(200).json({status: 200, data: {}, message: 'yes we are live'});
 });
 
+//here we import our controllers.
+const VehicleController = require('./controllers/VehicleController');
+
+//okay so here we begin to register our routes.
+apiRouter.get('/vehicles',  VehicleController.index); //get all vehicles, also by category if the categories query param is filled
+
+apiRouter.get('/vehicles/:licenseNumber', VehicleController.show); //retrieve a single vehicle by license number.
+
+apiRouter.
+
+
 
 
 

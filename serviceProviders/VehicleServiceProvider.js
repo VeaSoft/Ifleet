@@ -184,7 +184,7 @@ exports.getAllVehicles = async (limit = -1) => {
  * @returns {Promise<void>} |resolves to the vehicle array object.
  *
  */
-exports.getAllVehiclesUnderACategory = async (categoryNames, limit = -1) => {
+exports.getAllVehiclesUnderACategoryList = async (categoryNames, limit = -1) => {
     let lowerCaseCategories = [];
     categoryNames.map((categoryName) => {
         lowerCaseCategories.push(categoryName.toLocaleLowerCase());
@@ -213,7 +213,7 @@ exports.deleteVehicleByLicenseNumber = async (licenseNumber) => {
     }
 
     await VehicleModel.findAndRemove({vehicle});
-    return {success: false, data: {}, message: 'vehicle has been deleted.'};
+    return {success: true, data: {}, message: 'vehicle has been deleted.'};
 
 }
 
